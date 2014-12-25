@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans 'Scan Result' %} | {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="backlink"><a href={{ referer }}>&laquo;&nbsp;{% trans "Back" %}</a></div>
+    <span class="result{% if result.finished_on and not result.finished_ok %} attn{% endif %}"><a class="name" href={% url 'rainmap_scan_view' scan_id=result.for_scan.id %}>{{ result.for_scan.name }}</a>{% if result.finished_on %}{% trans "finished about" %} <a class="res" href={% url 'rainmap_result_view' result_id=result.id %}>{{ result.finished_on|timesince }}</a>{% else %}{% trans "was started" %} {{ result.started_on|timesince}}{% endif %} {% trans "ago" %}</span>
+    <div class="actions">
+        <span class="ann"><a href={% url 'rainmap_scan_run' scan_id=result.for_scan.id %}>{% trans "Rerun Scan" %}</a></span>
+        &nbsp;&bull;&nbsp;
+        <span class="ann"><a href="{% url 'rainmap_result_view' result_id=result.id %}?view=html" target="_blank">{% trans "No Frame" %}</a></span>
+        &nbsp;&bull;&nbsp;
+        <span class="ann"><a href="{% url 'rainmap_result_view' result_id=result.id %}?view=xml">{% trans "XML" %}</a></span>
+        &nbsp;&bull;&nbsp;
+        <span class="ann"><a href="{% url 'rainmap_result_view' result_id=result.id %}?view=nmap">{% trans "Text" %}</a></span>
+        &nbsp;&bull;&nbsp;
+        <span class="ann"><a href="{% url 'rainmap_result_view' result_id=result.id %}?view=gnmap">{% trans "Greppable" %}</a></span>
+        <span class="ann del-ref"><a href={% url 'rainmap_result_delete' result_id=result.id %}>{% trans "Delete This Result" %}</a></span>
+    </div>
+
+    {% if resloc %}
+        <iframe class="resframe" src={{ resloc }} width="100%" height="600" seamless>
+            <p>{% trans "Your browser doesn't have support for iframes, and we can't display the scan result." %}</p>
+        </iframe>
+    {% else %}
+        <p>{% trans "No output has been saved for this scan. This is likely due to a problem on our end, and an administrator has been notified. Sorry =(" %}
+    {% endif %}
+
+{% endblock content %}

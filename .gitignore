@@ -1,0 +1,6 @@
+*.pyc
+venv/*
+db.*
+*.log
+storage/*
+*.pid

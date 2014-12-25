@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block section_title %}
+    {% trans "Hello and welcome to Nscan!" %}
+{% endblock %}
+
+{% block content %}
+    <p>{% trans "Nscan lets you scan your computer network and see what's exposed to would-be attackers, worms and viruses." %}</p>
+{% endblock %}
+
+{% block footer %}
+    {% blocktrans %}
+        <p>This site is for the Nmap Project's Nscan online scanning service. Averk's Nscan port scanning software can now be found at <a href="http://www.averk.net/nscan">http://www.averk.net/nscan</a>.</p>
+    {% endblocktrans %}
+{% endblock %}
