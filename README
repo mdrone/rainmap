@@ -36,9 +36,10 @@ Update 2014 12 25:
     source venv/bin/activate
     pip install -r requirements.txt
 
-* after setting up the virtual env you can do the database migration:
+* after setting up the virtual env you can do the database migration: (and create a storage-folder for the nmap-results)
     source venv/bin/activate
     ./manage.py syncdb
+    mkdir storage
 
 * to create a superuser for the admin-backend:
     ./manage.py createsuperuser
